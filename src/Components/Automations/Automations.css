@@ -1,0 +1,147 @@
+
+.automations-wrapper{
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 4rem;
+
+}
+.automations-wrapper button{
+    width: 20rem;
+    height: 3rem;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: rgb(241, 255, 217);
+}
+.automations-wrapper button:hover{
+   background-color:rgb(248, 255, 236);
+}
+.automations-container{
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    width: 82vw;
+    border-radius: 1rem;
+    max-height:85vh ;
+    overflow: auto;
+    box-sizing: border-box;
+    background-color: rgba(68, 86, 108, 1);
+    word-wrap: break-word;
+
+}
+.automations-list{
+    overflow: auto;
+}
+.automation-item{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+.automation-item h2{
+    font-weight: 500;
+    margin-right: 1rem;
+}
+.form-switch {
+    display: inline-block;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    color: rgba(102, 102, 102, 1);
+  }
+  .form-switch i {
+    position: relative;
+    display: inline-block;
+    margin-right: .25rem;
+    width: 46px;
+    height: 26px;
+    background-color: #e6e6e6;
+    border-radius: 23px;
+    vertical-align: text-bottom;
+    transition: all 0.3s linear;
+  }
+  .form-switch i::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 42px;
+    height: 22px;
+    background-color: #fff;
+    border-radius: 11px;
+    transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
+    transition: all 0.25s linear;
+  }
+  .form-switch i::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    background-color: #fff;
+    border-radius: 11px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
+    transform: translate3d(2px, 2px, 0);
+    transition: all 0.2s ease-in-out;
+  }
+  .form-switch:active i::after {
+    width: 28px;
+    transform: translate3d(2px, 2px, 0);
+  }
+  .automation-item .form-switch:active input:checked + i::after { transform: translate3d(16px, 2px, 0); }
+  .automation-item .form-switch input { display: none; }
+  .automation-item .form-switch input:checked + i { background-color: #4BD763; }
+  .automation-item .form-switch input:checked + i::before { transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0); }
+  .automation-item .form-switch input:checked + i::after { transform: translate3d(22px, 2px, 0); }
+#modal-content{
+    height: 30rem;
+    width: 70rem;
+    background-color: white;
+    padding: 2rem ;
+}
+.modal-content form{
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    gap: 5rem;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+.input-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.input-group{
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    
+}
+.input-group label{
+   font-size: 12px;
+}
+.input-group input,.input-group select{
+    width: 20rem;
+    height: 3rem;
+    padding: .25rem;
+    border-top-left-radius: .5rem !important;
+    border-top-right-radius: .5rem !important;
+    border: 2px solid rgba(163, 177, 138, 1);
+}
+.input-group input:focus,.input-group select:focus{
+outline:1px solid rgba(163, 177, 138, 1);
+    
+}
+.buttons{
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+#submit-button{
+    padding: 1rem 0 1rem 0;
+    width: 10rem;
+    border: none;
+    border-radius: 2rem;
+    background-color:#a3b18a ;
+    color: white;
+}
