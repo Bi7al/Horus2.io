@@ -1,0 +1,31 @@
+.wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.logs-container {
+
+    width: 80vw;
+    height: 90vh;
+}
+.logs-container table{
+    width: 100%;
+    
+}
+
+.logs-container table tbody tr:nth-child(even) {
+    background-color: rgb(200, 255, 252);
+}
+
+.logs-container table th{
+    background-color: black;
+    color: aliceblue;
+    text-align: start;
+    padding-left: 1rem;
+}
+.logs-container tr td{
+    padding: 1rem;
+}

@@ -34,7 +34,7 @@ function SideBar() {
                 </li>
                 <li>
                     <div className="Icon Log"></div>
-                    <Link to={"Log"}>Logs</Link>
+                    <Link to={"/Log"}>Logs</Link>
                 </li>
                 <li>
                     <div className="Icon Settings"></div>

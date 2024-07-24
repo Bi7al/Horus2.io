@@ -7,7 +7,8 @@ import Users from './Components/Users/Users.jsx';
 import Rooms from './Components/Rooms/Rooms.jsx';
 import Automations from './Components/Automations/Automations.jsx';
 import Devices from './Components/Devices/Devices.jsx';
-//Automations
+import Log from './Components/LogComponent/LogComponent.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/Devices",
         element: <Devices />,
+        errorElement: <ErrorElement />
+      }, {
+        path: "/Log",
+        element: <Log />,
         errorElement: <ErrorElement />
       }
     ],
