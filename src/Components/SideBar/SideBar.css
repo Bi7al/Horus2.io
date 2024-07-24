@@ -1,0 +1,73 @@
+.Sidebar-header{
+    display: flex;
+    justify-content: center;
+}
+.Sidebar-header .Icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    
+}
+.SideBar-title{
+    margin-top: .4rem;
+}
+/* CSS for Icons */
+.Icon{
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-top: 2px;
+}
+.horus{
+    background: url("../../Assets/pngs/Sun_fill.png");
+    background-size: cover;
+}
+.Dashboard{
+    background: url("../../Assets/pngs/Dashboard.png");
+    background-size: cover;
+}
+.Rooms{
+    background: url("../../Assets/pngs/Rooms.png");
+    background-size: cover;
+}
+.Device{
+    background: url("../../Assets/pngs/Devices.png");
+    background-size: cover;
+}
+.Automation{
+    background: url("../../Assets/pngs/Automations.png");
+    background-size: cover;
+}
+.User{
+    background: url("../../Assets/pngs/User.png");
+    background-size: cover;
+}
+.Log{
+    background: url("../../Assets/pngs/Logs.png");
+    background-size: cover;
+}
+.Settings{
+    background: url("../../Assets/pngs/Setting_fill.png");
+    background-size: cover;
+}
+
+/* *Css For Sidebar Body*/
+
+.Sidebar-body{
+    margin-top: 3rem;
+    margin-left: .5rem;
+    list-style: none;
+}
+.Sidebar-body  li{
+    margin-top: .75rem;
+    display: flex;
+    gap:1rem
+}
+.Sidebar-body  li a{
+    text-decoration: none;
+    color: rgba(196, 197, 208, 1);
+    margin-bottom: 10px;
+}
+
+.Sidebar-body  li a:focus,.Sidebar-body  li a:hover{
+    color: rgb(255, 255, 255);
+}
+

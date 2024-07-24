@@ -1,0 +1,50 @@
+.management-container{
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    padding: 1.5rem 1rem 0 1rem;
+    box-sizing: border-box;
+}
+.table-container{
+    min-height: 5rem;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    border-radius: 2rem;
+    background-color: rgba(68, 86, 108, 1);
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+.table-container table{
+    border-collapse: separate;
+    -webkit-border-horizontal-spacing:0 ;
+    -webkit-border-vertical-spacing:5px ;
+    border-spacing: 0 1rem ;
+    margin-left: 5rem;
+    width: 50rem ;
+}
+
+.table-container table th{
+    color: rgb(218, 218, 218);
+    text-align: start;
+    padding: .5rem 1rem 0.5rem 1rem;
+    font-weight: 500;
+}
+.table-container table tbody tr{
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+.table-container table td {
+    padding: .5rem 1rem 0.5rem 1rem;
+    margin-bottom: 1rem;
+} 
+/* .table-container table tbody img{
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: #3c1818;
+}
+
+
+
+
