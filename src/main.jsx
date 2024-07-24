@@ -8,7 +8,7 @@ import Rooms from './Components/Rooms/Rooms.jsx';
 import Automations from './Components/Automations/Automations.jsx';
 import Devices from './Components/Devices/Devices.jsx';
 import Log from './Components/LogComponent/LogComponent.jsx';
-
+import DashboardComponent from './Components/Dashboard/Dashboard.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       }, {
         path: "/Log",
         element: <Log />,
+        errorElement: <ErrorElement />
+      }, {
+        path: "/",
+        element: <DashboardComponent />,
         errorElement: <ErrorElement />
       }
     ],
