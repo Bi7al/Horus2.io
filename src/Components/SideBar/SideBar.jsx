@@ -22,7 +22,7 @@ function SideBar() {
                 </li>
                 <li>
                     <div className="Icon Device"></div>
-                    <Link to={"Device"}>Devices</Link>
+                    <Link to={"/Devices"}>Devices</Link>
                 </li>
                 <li>
                     <div className="Icon Automation"></div>

@@ -1,0 +1,81 @@
+.device-wrapper{
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+.addbtn{
+    margin-left: 80%;
+}
+.device-wrapper .addbtn button{
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: .5rem 1rem;
+    background-color: white;
+   
+}
+.device-list-container{
+    width: 100%;
+    box-sizing: border-box;
+}
+.devices{
+    padding: 1rem;
+    overflow: auto;
+}
+.accordianItem{
+    width: 100%;
+    background-color: rgba(68, 86, 108, 1);
+    padding:1rem 1rem 1rem .5rem;
+    border: 2px solid black;
+    border-top: 0;
+    border-bottom-left-radius:1rem;
+    border-bottom-right-radius:1rem;
+    overflow: hidden;
+    color: white;
+    overflow: auto;
+    
+}
+.devices .header{
+    display: flex;
+    background-color: rgba(68, 86, 108, 1);
+    padding: 1rem 0 0.5rem 0.5rem;
+    width: 100%;
+    border-top-left-radius:1rem;
+    border-top-right-radius:1rem;
+    text-align:start;
+    border: 2px solid black;
+    border-bottom:0;
+    display: flex;
+}
+
+.header::after:focus{
+    rotate: 180deg;
+}
+.devices .header button{
+    display: flex;
+    background: none;
+    border: none;
+}
+
+.devices button::after{
+    margin-left: 2rem;
+    margin-top: 5px;
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    
+}
+.Lights::after{
+    background: url(../../Assets/pngs/Sun_fill@2x.png);
+    background-size: cover;
+}
+.Heaters::after{
+    background: url(../../Assets/pngs/Temperature@2x.png);
+    background-size: cover;
+}
+.AirQuality::after{
+    background: url(../../Assets/pngs/Turbine@2x.png);
+    background-size: cover;
+}
+
+

@@ -6,6 +6,7 @@ import './index.css';
 import Users from './Components/Users/Users.jsx';
 import Rooms from './Components/Rooms/Rooms.jsx';
 import Automations from './Components/Automations/Automations.jsx';
+import Devices from './Components/Devices/Devices.jsx';
 //Automations
 const router = createBrowserRouter([
   {
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       , {
         path: "/Automations",
         element: <Automations />,
+        errorElement: <ErrorElement />
+      },
+      {
+        path: "/Devices",
+        element: <Devices />,
         errorElement: <ErrorElement />
       }
     ],
