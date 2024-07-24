@@ -6,7 +6,7 @@ import './index.css';
 import Users from './Components/Users/Users.jsx';
 import Rooms from './Components/Rooms/Rooms.jsx';
 import Automations from './Components/Automations/Automations.jsx';
-
+//Automations
 const router = createBrowserRouter([
   {
     path: "/",
