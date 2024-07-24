@@ -9,12 +9,18 @@ import Automations from './Components/Automations/Automations.jsx';
 import Devices from './Components/Devices/Devices.jsx';
 import Log from './Components/LogComponent/LogComponent.jsx';
 import DashboardComponent from './Components/Dashboard/Dashboard.jsx';
+import Settings from './Components/Settings/Settings.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorElement />,
     children: [
+      {
+        path: "/",
+        element: <DashboardComponent />,
+        errorElement: <ErrorElement />
+      },
       {
         path: "/Users",
         element: <Users />,
@@ -38,9 +44,10 @@ const router = createBrowserRouter([
         path: "/Log",
         element: <Log />,
         errorElement: <ErrorElement />
-      }, {
-        path: "/",
-        element: <DashboardComponent />,
+      },
+      {
+        path: "/Settings",
+        element: <Settings />,
         errorElement: <ErrorElement />
       }
     ],

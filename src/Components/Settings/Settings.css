@@ -1,0 +1,92 @@
+.settings-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(242, 233, 228, 1);
+    padding: 3rem 0 0 3rem;
+    box-sizing: border-box;
+}
+.settings-container h2,h3,h4,h5,h6{
+    font-weight: 500;
+}
+.updates-body{
+    margin-top: 1rem;
+    margin-left: .5rem;
+
+}
+
+.update-status button{
+    background-color: white;
+    border: none;
+    padding: 5px;
+    margin-right: 2rem;
+    box-sizing: border-box;
+}
+.update-status button:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+.update-status {
+  color:  rgba(163, 177, 138, 1)
+}
+.backup-options{
+    display: flex;
+    height: 1.5rem;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 2rem 0 1rem 0;
+}
+.backup-options label{
+    display: flex;
+    gap: .25rem;
+    font-weight: 600;
+}
+.integration-search{
+    margin-top: 4rem;
+}
+
+.integrations
+ p{
+    color:rgba(102, 102, 102, 1);
+    font-size: 12px;
+    margin-left: .25rem;
+    margin-top: 3rem;
+}
+.integration-list{
+    width: 80vw;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 2rem;
+    gap: 1.5rem;
+
+}
+.Integration-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.integration-search-input
+{
+    margin-top: 3rem;
+    width: 25rem;
+    background-color: white;
+    border-radius: 2rem;
+    overflow: hidden;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+    box-sizing: border-box;
+}
+.integration-search-input label{
+    height: 1.5rem;
+    width: 1.5rem;
+    background: url("../../Assets/pngs/Search_alt.png");
+}
+.integration-search-input input{
+    
+    width: 100%;
+    border: none;
+}
+.integration-search-input input:focus{
+    outline: none;
+}
