@@ -26,7 +26,7 @@ function SideBar() {
                 </li>
                 <li>
                     <div className="Icon Automation"></div>
-                    <Link to={"Automation"}>Automations</Link>
+                    <Link to={"/Automations"}>Automations</Link>
                 </li>
                 <li>
                     <div className="Icon User"></div>

@@ -5,6 +5,7 @@ import App from './App.jsx'
 import './index.css';
 import Users from './Components/Users/Users.jsx';
 import Rooms from './Components/Rooms/Rooms.jsx';
+import Automations from './Components/Automations/Automations.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
       {
         path: "/Rooms",
         element: <Rooms />,
+        errorElement: <ErrorElement />
+      }
+      , {
+        path: "/Automations",
+        element: <Automations />,
         errorElement: <ErrorElement />
       }
     ],
