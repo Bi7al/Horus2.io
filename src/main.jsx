@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter, useRouteError } from 'react-router
 import App from './App.jsx'
 import './index.css';
 import Users from './Components/Users/Users.jsx';
+import Rooms from './Components/Rooms/Rooms.jsx';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
       {
         path: "/Users",
         element: <Users />,
+        errorElement: <ErrorElement />
+      },
+      {
+        path: "/Rooms",
+        element: <Rooms />,
         errorElement: <ErrorElement />
       }
     ],

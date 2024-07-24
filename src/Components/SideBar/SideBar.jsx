@@ -18,7 +18,7 @@ function SideBar() {
                 </li>
                 <li>
                     <div className="Icon Rooms"></div>
-                    <Link to={"Rooms"}>Rooms</Link>
+                    <Link to={"/Rooms"}>Rooms</Link>
                 </li>
                 <li>
                     <div className="Icon Device"></div>
