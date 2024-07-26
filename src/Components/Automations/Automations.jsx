@@ -41,6 +41,7 @@ function Automations() {
         name: "",
         checked: false,
         triggerEvent: "",
+        triggerDate: "",
         triggerDevice: "",
         action: "",
 
@@ -73,6 +74,7 @@ function Automations() {
         e.preventDefault();
         ClseBtn.current.click();
         setAutomations([...automations, newAutomation]);
+        console.log(newAutomation)
         setAutomation((prev) => {
             return {
                 name: "",
@@ -135,7 +137,7 @@ function Automations() {
                             <div className="input-row">
                                 {newAutomation.triggerEvent === 'Device' && (
                                     <div className='input-group'>
-                                        <label htmlFor="triggerDevice">Trigger device:</label>
+                                        <label htmlFor="triggerDevice">Trigger Date:</label>
                                         <input
                                             type="text"
                                             id="triggerDevice"
@@ -147,6 +149,22 @@ function Automations() {
                                         />
                                     </div>
                                 )}
+                                {
+                                    newAutomation.triggerEvent === "Calendar" && (
+                                        <div className='input-group'>
+                                            <label htmlFor="triggerDevice">Trigger device:</label>
+                                            <input
+                                                type="date"
+                                                id="triggerDevice"
+                                                value={newAutomation.triggerDate}
+                                                placeholder='Enter Device Name'
+                                                name='triggerDate'
+                                                onChange={handleChange}
+                                                required={true}
+                                            />
+                                        </div>
+                                    )
+                                }
 
                                 <div className='input-group'>
                                     <label htmlFor="action">Action:</label>
