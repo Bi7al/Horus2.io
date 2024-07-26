@@ -147,7 +147,7 @@ function Rooms() {
                                     <option value="Floor 3">Floor 3</option>
                                 </select>
                             </div>
-                            <button type='submit' data-bs-dismiss="modal">Book</button>
+                            <button type='submit' data-bs-dismiss="modal">Create Room</button>
                         </form>
                     </div>
                 </div>
