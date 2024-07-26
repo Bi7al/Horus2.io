@@ -97,7 +97,7 @@
     background-color: white;
     padding: 2rem ;
 }
-.modal-content form{
+.modal-content .automation-form{
     display: flex;
     flex-direction: column;
     align-items:start;

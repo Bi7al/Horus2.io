@@ -75,7 +75,7 @@ overflow: auto;
         width: 1rem;
     }
 }
-.modal-content{
+.new-room-form{
     border: 2px solid rgb(255,196, 107);
 }
 #room-modal{

@@ -2,13 +2,13 @@
     height: 100vh;
     width: 100%;
     overflow-y: auto;
-    padding: 1.5rem 1rem 0 1rem;
+    padding: .5rem 1rem 0 1rem;
     box-sizing: border-box;
 }
 .table-container{
-    min-height: 5rem;
-    padding: 1rem;
-    padding-bottom: 2rem;
+    padding: .5rem;
+    height: 16rem;
+    overflow: auto;
     width: 100%;
     border-radius: 2rem;
     background-color: rgba(68, 86, 108, 1);
@@ -21,7 +21,10 @@
     -webkit-border-vertical-spacing:5px ;
     border-spacing: 0 1rem ;
     margin-left: 5rem;
+    height: 10rem;
     width: 50rem ;
+    overflow: auto;
+    
 }
 
 .table-container table th{
@@ -29,6 +32,7 @@
     text-align: start;
     padding: .5rem 1rem 0.5rem 1rem;
     font-weight: 500;
+
 }
 .table-container table tbody tr{
     background-color: aliceblue;
@@ -44,6 +48,55 @@
     border-radius: 50%;
     background-color: #3c1818;
 }*/
+.management-container{
+    button{
+        border: none;
+        background:rgb(255, 153, 70);
+        margin-bottom: 1rem;
+        margin-left: 1rem;
+        padding: .5rem;
+        border-radius: 4rem;
+    }
+}
+.users-form{
+    display: flex;
+    height: 20rem;
+    justify-content: space-around;
+    padding: 2rem;
+    gap: 2rem;
+    
+}
+.column{
+        width: 20rem;
+}
+.users-form__input{
+    display: flex;
+    flex-direction: column;
+    margin: .5rem;
+    gap: .5rem;
+    label{
+        font-weight: 500;
+    }
+    input{
+        padding: .5rem;
+
+    }
+    
+}
+.form-submit{
+    background-color: rgb(255, 153, 70);
+    color: aliceblue;
+    padding: .5rem;
+    width: 8rem;
+    border-radius: 4rem;
+    border: 1px solid rgb(254, 255, 208);
+    margin-bottom: 1rem;
+}
+.form-submit:hover{
+    border: 1px solid rgb(255, 169, 126);
+    box-sizing: border-box;
+    scale: 1.1;
+}
 
 
 

@@ -111,7 +111,7 @@ function Automations() {
             <div className="modal fade" id="AutoInput" tabIndex="-1" role="dialog" aria-labelledby="New Automation Dialog" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div className="modal-content" id='#modal-content'>
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit} className='automation-form'>
                             <div className="input-row">
                                 <div className="input-group">
                                     <label htmlFor="automation-name">Automation Name:</label>
@@ -137,27 +137,29 @@ function Automations() {
                             <div className="input-row">
                                 {newAutomation.triggerEvent === 'Device' && (
                                     <div className='input-group'>
-                                        <label htmlFor="triggerDevice">Trigger Date:</label>
-                                        <input
-                                            type="text"
+                                        <label htmlFor="triggerDevice">Trigger Device:</label>
+                                        <select
                                             id="triggerDevice"
+                                            name="triggerDevice"
                                             value={newAutomation.triggerDevice}
-                                            placeholder='Enter Device Name'
-                                            name='triggerDevice'
                                             onChange={handleChange}
                                             required={true}
-                                        />
+                                        >
+                                            <option value="" hidden={true}>Select Trigger Device</option>
+                                            <option value="Device 1">Device 1</option>
+                                            <option value="Device 2">Device 2</option>
+                                        </select>
                                     </div>
                                 )}
                                 {
                                     newAutomation.triggerEvent === "Calendar" && (
                                         <div className='input-group'>
-                                            <label htmlFor="triggerDevice">Trigger device:</label>
+                                            <label htmlFor="triggerDate">Trigger date:</label>
                                             <input
                                                 type="date"
-                                                id="triggerDevice"
+                                                id="triggerDate"
                                                 value={newAutomation.triggerDate}
-                                                placeholder='Enter Device Name'
+                                                placeholder='Select Date'
                                                 name='triggerDate'
                                                 onChange={handleChange}
                                                 required={true}

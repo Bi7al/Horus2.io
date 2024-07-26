@@ -113,7 +113,7 @@ function Rooms() {
                 aria-hidden="true"
             >
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div className=" modal-content ">
+                    <div className=" modal-content new-room-form">
                         <form action="" onSubmit={handleSubmit} className='' id='room-modal'>
                             <div className="input-group-room d-flex flex-column">
                                 <label htmlFor="room ">Name of the Room</label>
