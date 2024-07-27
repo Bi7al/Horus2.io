@@ -1,99 +1,87 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './Rooms.css'
+import NewRoom from './NewRoom';
+import NewBuilding from './NewBuilding';
 function Rooms() {
-    const [room, setRoom] = useState(
-        {
-            roomName: "",
-            location: "",
-            roomType: "",
-            building: ""
-        }
-    );
-    const [building1, setBuilding1] = useState([]);
-    const [building3, setBuilding3] = useState([]);
-    const [building2, setBuilding2] = useState([]);
-    function handleChange(e) {
-        const { name, value } = e.target;
-        setRoom({
-            ...room,
-            [name]: value
-        });
+    const modalCls = useRef();
+    const [modal, setModal] = useState();
+    const [buildings, setBuildings] = useState([
 
-    }
-    function handleSubmit(event) {
-        event.preventDefault()
-        switch (room.building) {
-            case "building1":
-                setBuilding1([...building1, room])
-                break;
-            case "building2":
-                setBuilding2([...building2, room])
-                break;
-            case "building3":
-                setBuilding3([...building3, room])
-                break;
+    ])
 
+    function modalRender(event) {
+        switch (event.target.name) {
+            case "Room":
+                if (buildings.length === 0) {
+                    setModal("! No Buildings to Add Room to")
+                } else {
+                    setModal(<NewRoom buildings={buildings} setBuildings={setBuildings} modalClose={modalClose} />);
+                }
+                break;
+            case "Building":
+                setModal(<NewBuilding buildings={buildings} setBuildings={setBuildings} modalClose={modalClose} />);
+                break;
             default:
+                console.log("Invalid modal type");
                 break;
         }
-        setRoom({
-            roomName: '',
-            location: '',
-            roomType: '',
-            building: ''
-
-        })
     }
 
+    function modalClose() {
+        if (modalCls.current) {
+            modalCls.current.click();
+        }
+    }
+
+    function removeBuilding(buildingName) {
+        const buildingIndex = buildings.findIndex(building => building.name === buildingName);
+        if (buildingIndex !== -1) {
+            setBuildings(buildings.filter(building => building.name !== buildingName));
+        } else {
+            console.log("Building not found");
+        }
+    }
+
+    function removeRoom(targetRoom) {
+        const result = buildings.map(building => {
+            if (building.name === targetRoom.building) {
+                building.rooms = building.rooms.filter(room => room.roomId !== targetRoom.roomId);
+            }
+            return building;
+        })
+        setBuildings(result);
+    }
     return (
         <>
             <div className='room-wrapper' id='room-parent'>
-                <button data-bs-toggle="modal" data-bs-target="#new-device" className='new-device-btn'>Add New Room</button>
+                <button data-bs-toggle="modal" name='Room' data-bs-target="#new-room" onClick={modalRender} className='new-room-btn'>Add New Room</button>
+                <button data-bs-toggle="modal" name='Building' data-bs-target="#new-room" onClick={modalRender} className='new-room-btn ms-2'>Add New Buidling</button>
                 <div className="buiding-group">
-                    <div className="building">
-                        <div className="building__name"><button className='collapsed' data-bs-toggle="collapse" data-bs-target="#building1"><h5>Building 1</h5>Adress {building1.length} Rooms</button></div>
-                        <hr />
-                        <div className="building__rooms collapse" id='building1'>
-                            {
-                                building1.map((room, index) => {
-                                    return (
-                                        <div className="room" key={index}>
-                                            {room.roomName}
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
-                    <div className="building">
-                        <div className="building__name"><button className='collapsed' data-bs-toggle="collapse" data-bs-target="#building2"><h5>Building 2 </h5>Adress {building2.length} Rooms</button></div>
-                        <hr />
-                        <div className="building__rooms collapse" id='building2'>
-                            {building2.map((room, index) => {
-                                return (
-                                    <div className="room" key={index}>
-                                        {room.roomName}
-                                    </div>
-                                )
-                            })}
 
-                        </div>
-                    </div>
-                    <div className="building">
-                        <div className="building__name"><button className='collapsed' data-bs-toggle="collapse" data-bs-target="#building3"><h5>Building 3</h5>Adress {building3.length} Rooms</button></div>
-                        <hr />
-                        <div className="building__rooms collapse" id='building3'>
-                            {
-                                building3.map((room, index) => {
-                                    return (
-                                        <div className="room" key={index}>
-                                            {room.roomName}
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
+                    {
+                        buildings.map((building, index) => {
+                            return (
+                                <div key={index} className="building">
+                                    <div className="building__name"><button className='collapsed' data-bs-toggle="collapse" data-bs-target={`#building${index}`}><h5>{building.name}</h5>Adress {building.rooms.length} Rooms</button>
+                                    </div>
+                                    <hr />
+                                    <div className="building__rooms collapse" id={`building${index}`}>
+                                        {
+                                            building.rooms.map((room, index) => {
+                                                return (
+                                                    <div className="room" key={index}>
+                                                        {room.roomName}
+                                                        <button onClick={() => removeRoom(room)} >X</button>
+                                                    </div>
+                                                )
+                                            })
+
+                                        }
+                                    </div>
+                                    <button className='building-remove-btn' onClick={() => removeBuilding(building.name)}>Remove Building</button>
+                                </div>)
+                        })
+                    }
                 </div>
                 <div className="room-types">
                     <div className="types-title">
@@ -104,53 +92,20 @@ function Rooms() {
                         <h6>Open Spaces</h6>
                     </div>
                 </div>
-            </div>
+            </div >
             <div
                 className="modal fade"
-                id="new-device"
+                id="new-room"
                 tabIndex="-1"
-                aria-labelledby="ADDNEWDEVICE"
+                aria-labelledby="ADDNEWRoom"
                 aria-hidden="true"
             >
                 <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div className=" modal-content new-room-form">
-                        <form action="" onSubmit={handleSubmit} className='' id='room-modal'>
-                            <div className="input-group-room d-flex flex-column">
-                                <label htmlFor="room ">Name of the Room</label>
-                                <input id='room' name='roomName' type="text" onChange={handleChange} value={room.roomName} placeholder="Enter Room Name" required={true} />
-                            </div>
-                            <div className="input-group-room d-flex align-items-center ">
-                                <label htmlFor="room-type " className='me-5'>Room Type:</label>
-                                <label htmlFor="room-type " className='ms-4'>Meeting Room</label>
-                                <input type="radio" name='roomType' value={"meeting"} onChange={handleChange} className='ms-1' required={true} />
-                                <label htmlFor="room-type " className='ms-4'>Offices</label>
-                                <input type="radio" name='roomType' value={"office"} onChange={handleChange} className='ms-1' required={true} />
-                                <label htmlFor="room-type " className='ms-4'>OpenSpaces</label>
-                                <input type="radio" name='roomType' value={"OpenSpaces"} onChange={handleChange} className='ms-1' required={true} />
-                            </div>
-                            <div className="input-group-room d-flex flex-column">
-                                <label htmlFor="building">Location</label>
-                                <select name="building" id="building" onChange={handleChange} required={true} value={room.building}>
-                                    <option >Select Building</option>
-                                    <option value="building1">Building 1</option>
-                                    <option value="building2">Building 2</option>
-                                    <option value="building3">Building 3</option>
-                                </select>
-                            </div>
-
-                            <div className="input-group-room d-flex flex-column">
-                                <label htmlFor="room ">Floor</label>
-                                <select name="location" id="building" onChange={handleChange} value={room.location} required={true}>
-                                    <option >Select Floor</option>
-                                    <option value="Floor 1">Floor 1</option>
-                                    <option value="Floor 2">Floor 2</option>
-                                    <option value="Floor 3">Floor 3</option>
-                                </select>
-                            </div>
-                            <button type='submit' data-bs-dismiss="modal">Create Room</button>
-                        </form>
+                    <div className=" modal-content p-1 new-room-form">
+                        {modal}
                     </div>
                 </div>
+                <button ref={modalCls} data-bs-dismiss="modal" hidden></button>
             </div>
         </>
     )

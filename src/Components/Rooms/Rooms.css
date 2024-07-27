@@ -3,13 +3,14 @@ height: 100vh;
 width: 100%;
 padding: 1rem;
 overflow: auto;
-    button{
+    
+}
+.new-room-btn{
     border: none;
     padding: 10px;
     border-radius: 5rem;
     background-color: rgb(255, 217, 159);
     color: white;
-}
 }
 .building{
     width: 100%;
@@ -94,4 +95,26 @@ overflow: auto;
     button:hover{
 color: rgb(203, 209, 214);
     }
+}
+.building-remove-btn{
+    color: rgb(0, 0, 0);  
+    padding: none;  
+    background:transparent;
+    border: none;
+
+}
+.building-remove-btn:hover{
+    color: rgb(103, 103, 103);  
+    text-decoration: underline;
+
+}
+/* For New Building */
+.building-form-clsbtn{
+    background-color: rgb(255, 196, 107);
+    width: 10rem;
+    padding: .5rem;
+    color: white;
+    border: none;
+    border-radius: 5rem;
+    margin-top: 1rem;
 }
