@@ -6,9 +6,16 @@ function Rooms() {
     const modalCls = useRef();
     const [modal, setModal] = useState();
     const [buildings, setBuildings] = useState([
+        /*
+        Base Template
+        {
+        name:"",
+        rooms:[]
+        }
+        */
 
     ])
-
+    //Changes Contetn of Modal Dynamically
     function modalRender(event) {
         switch (event.target.name) {
             case "Room":
@@ -26,20 +33,18 @@ function Rooms() {
                 break;
         }
     }
-
+    //Function Used to Close BootStrap Modal
     function modalClose() {
         if (modalCls.current) {
             modalCls.current.click();
         }
     }
 
+
+
     function removeBuilding(buildingName) {
-        const buildingIndex = buildings.findIndex(building => building.name === buildingName);
-        if (buildingIndex !== -1) {
-            setBuildings(buildings.filter(building => building.name !== buildingName));
-        } else {
-            console.log("Building not found");
-        }
+        alert("Are you Sure And Want to Proceed Deleting " + buildingName)
+        setBuildings(buildings.filter(building => building.name !== buildingName));
     }
 
     function removeRoom(targetRoom) {
@@ -54,8 +59,8 @@ function Rooms() {
     return (
         <>
             <div className='room-wrapper' id='room-parent'>
-                <button data-bs-toggle="modal" name='Room' data-bs-target="#new-room" onClick={modalRender} className='new-room-btn'>Add New Room</button>
-                <button data-bs-toggle="modal" name='Building' data-bs-target="#new-room" onClick={modalRender} className='new-room-btn ms-2'>Add New Buidling</button>
+                <button data-bs-toggle="modal" name='Room' data-bs-target="#modal" onClick={modalRender} className='add-new-btn'>Add New Room</button>
+                <button data-bs-toggle="modal" name='Building' data-bs-target="#modal" onClick={modalRender} className='add-new-btn ms-2'>Add New Buidling</button>
                 <div className="buiding-group">
 
                     {
@@ -69,15 +74,16 @@ function Rooms() {
                                         {
                                             building.rooms.map((room, index) => {
                                                 return (
-                                                    <div className="room" key={index}>
+                                                    <div className="room " key={index}>
                                                         {room.roomName}
-                                                        <button onClick={() => removeRoom(room)} >X</button>
+                                                        <button className='remove-room-btn' onClick={() => removeRoom(room)} >Remove</button>
                                                     </div>
                                                 )
                                             })
 
                                         }
                                     </div>
+                                    <hr />
                                     <button className='building-remove-btn' onClick={() => removeBuilding(building.name)}>Remove Building</button>
                                 </div>)
                         })
@@ -95,7 +101,7 @@ function Rooms() {
             </div >
             <div
                 className="modal fade"
-                id="new-room"
+                id="modal"
                 tabIndex="-1"
                 aria-labelledby="ADDNEWRoom"
                 aria-hidden="true"

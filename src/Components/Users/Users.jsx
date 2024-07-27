@@ -111,7 +111,7 @@ function Users() {
       <div className="management-container">
         <div className='d-flex justify-content-between'>
           <h1>Users</h1>
-          <div>
+          <div className='mt-1'>
             <button data-bs-toggle="modal" data-bs-target="#NewUser">Add User</button>
             <button data-bs-toggle="modal" data-bs-target="#NewGroup">Add Group</button></div>
         </div >
