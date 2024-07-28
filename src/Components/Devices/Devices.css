@@ -105,3 +105,33 @@
 .opt-btn:hover{
 background-color: rgb(174, 174, 174);
 }
+.option-device-type{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+.height{
+    height: 15rem;
+}
+.device-type-input{
+    height: 2.5rem;
+    display: flex;
+    align-items:center ;
+    gap: .5rem;
+}
+.device-name-input{
+    display: flex;
+    flex-direction: column;
+
+}
+.new-device-submit-btn{
+    background-color: rgb(255, 196, 107);
+    padding: .75rem;
+    width: 8rem;
+    color: white;
+    font-weight: 600;
+    border: none;
+    margin-top: 2rem;
+    border-radius: 5rem;
+}
