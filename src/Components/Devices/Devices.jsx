@@ -132,8 +132,8 @@ function Devices() {
                                     Object.keys(devices).map((key, index) => {
                                         return (
                                             <div key={index} className="option-device-type ">
-                                                <input type="radio" id='heater' name='deviceType' value={key} onChange={onChange} required />
-                                                <label htmlFor="heater">{key}</label>
+                                                <input type="radio" id={key} name='deviceType' value={key} onChange={onChange} required />
+                                                <label htmlFor={key}>{key}</label>
                                             </div>
                                         )
                                     })
