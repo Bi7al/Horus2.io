@@ -207,18 +207,12 @@ function Users() {
             <form onSubmit={handleNewGroup} className='d-flex flex-column  align-items-center '>
               <div className="users-form">
                 <div className="column">
-
                   <div className='users-form__input'>
                     <label htmlFor="">Enter Group Name:</label>
                     <input type="text" name='name' value={newGroup.name} onChange={handleInputGroup} placeholder='Enter group Name' required />
                   </div>
-                  <div className='users-form__input'>
-                    <label htmlFor="">Number of Members:</label>
-                    <input type="number" name='members' value={newGroup.members} onChange={handleInputGroup} placeholder='Enter Number of Members' required />
-                  </div>
                 </div>
                 <div className="column">
-
                   <div className='users-form__input'>
                     <label htmlFor="">Enter Group ID:</label>
                     <input type="number" name='id' value={newGroup.id} onChange={handleInputGroup} placeholder='Enter Group ID' required />

@@ -2,15 +2,15 @@ import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import "../../Components/Automations/Automations.css";
 
-function AutomationItem({ automation, onChange }) {
+function AutomationItem({ automation, onChange, removeAutomation }) {
 
     return (
         <div className="automation-item">
             <h2>{automation.name}</h2>
             <label className="form-switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={(e) => { }} />
                 <i></i>
-                Modify
+                <button className='remove-automation' onClick={() => { removeAutomation(automation.id) }}>Remove</button>
             </label>
         </div>
     );
@@ -42,6 +42,7 @@ function Automations() {
         checked: false,
         triggerEvent: "",
         triggerDate: "",
+        triggerTime: "",
         triggerDevice: "",
         action: "",
 
@@ -81,15 +82,21 @@ function Automations() {
                 checked: false,
                 triggerEvent: "",
                 triggerDevice: "",
+                triggerDate: "",
+                triggerTime: "",
                 action: "",
             }
         });
 
     }
+    function removeAutomation(id) {
+        setAutomations(automations.filter(automation => automation.id !== id));
+
+    }
     return (
         <>
             <div className="automations-wrapper">
-                <button type='button' data-bs-toggle="modal" data-bs-target="#AutoInput">+ Create an Automation</button>
+                <button className='add-automation-button' type='button' data-bs-toggle="modal" data-bs-target="#AutoInput">+ Create an Automation</button>
                 <div className="automations-container">
                     <h1>Automations</h1>
                     <div className="automations-list">
@@ -99,6 +106,7 @@ function Automations() {
                                     key={autoName.id}
                                     automation={autoName}
                                     onChange={handleCheck}
+                                    removeAutomation={removeAutomation}
 
                                 />
                             )
@@ -181,7 +189,23 @@ function Automations() {
                                     />
                                 </div>
                             </div>
-
+                            {
+                                newAutomation.triggerEvent === "Calendar" &&
+                                <div className="input-row">
+                                    <div className='input-group'>
+                                        <label htmlFor="triggerTime">Trigger Time:</label>
+                                        <input
+                                            type="time"
+                                            id="triggerTime"
+                                            name='triggerTime'
+                                            value={newAutomation.triggerTime}
+                                            onChange={handleChange}
+                                            placeholder='Enter Trigger Time'
+                                            required={true}
+                                        />
+                                    </div>
+                                </div>
+                            }
                             <div className="buttons">
                                 <button type="submit" id='submit-button'>Save Automation</button>
                                 <button data-bs-dismiss="modal" ref={ClseBtn} type="button" id='submit-button'>Close</button>

@@ -1,6 +1,46 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
-function newAutomation() {
+function NewAutomation({ automations, setAutomations }) {
+    const ClseBtn = useRef();
+    const [newAutomation, setAutomation] = useState({
+        name: "",
+        checked: false,
+        triggerEvent: "",
+        triggerDate: "",
+        triggerTime: "",
+        triggerDevice: "",
+        action: "",
+
+    });
+
+    function handleChange(e) {
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+        setAutomation({
+            ...newAutomation,
+            [fieldName]: fieldValue, id: uuidv4()
+        });
+
+
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        ClseBtn.current.click();
+        setAutomations([...automations, newAutomation]);
+        setAutomation((prev) => {
+            return {
+                name: "",
+                checked: false,
+                triggerEvent: "",
+
+                triggerDevice: "",
+                triggerDate: "",
+                triggerTime: "",
+                action: "",
+            }
+        });
+
+    }
     return (
         <form onSubmit={handleSubmit} className='automation-form'>
             <div className="input-row">
@@ -72,6 +112,20 @@ function newAutomation() {
                     />
                 </div>
             </div>
+            <div className="input-row">
+                <div className='input-group'>
+                    <label htmlFor="triggerTime">Trigger Time:</label>
+                    <input
+                        type="text"
+                        id="triggerTime"
+                        name='triggerTime'
+                        value={newAutomation.triggerTime}
+                        onChange={handleChange}
+                        placeholder='Enter Action to perform'
+                        required={true}
+                    />
+                </div>
+            </div>
 
             <div className="buttons">
                 <button type="submit" id='submit-button'>Save Automation</button>
@@ -81,4 +135,4 @@ function newAutomation() {
     )
 }
 
-export default newAutomation
+export default NewAutomation

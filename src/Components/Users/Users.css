@@ -60,7 +60,7 @@
 }
 .users-form{
     display: flex;
-    height: 20rem;
+    height: 10rem;
     justify-content: space-around;
     padding: 2rem;
     gap: 2rem;

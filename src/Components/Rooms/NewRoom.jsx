@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
 
-function NewRoom({ buildings, setBuildings, modalClose }) {
+function NewRoom({ buildings, setBuildings, modalClose, roomGroups }) {
     const [room, setRoom] = useState({
         roomId: null,
         roomName: "",
@@ -50,12 +50,18 @@ function NewRoom({ buildings, setBuildings, modalClose }) {
             </div>
             <div className="input-group-room d-flex align-items-center ">
                 <label htmlFor="room-type " className='me-5'>Room Type:</label>
-                <label htmlFor="room-type " className='ms-4'>Meeting Room</label>
-                <input type="radio" name='roomType' value={"meeting"} onChange={handleChange} className='ms-1' required={true} />
-                <label htmlFor="room-type " className='ms-4'>Offices</label>
-                <input type="radio" name='roomType' value={"office"} onChange={handleChange} className='ms-1' required={true} />
-                <label htmlFor="room-type " className='ms-4'>OpenSpaces</label>
-                <input type="radio" name='roomType' value={"OpenSpaces"} onChange={handleChange} className='ms-1' required={true} />
+                {
+                    roomGroups.map((roomType, index) => {
+                        return (
+                            <>
+                                <label htmlFor="room-type " className='ms-4'>{roomType.name}</label>
+                                <input type="radio" name='roomType' value={roomType.name} onChange={handleChange} className='ms-1' required={true} />
+                            </>
+
+                        )
+                    })
+                }
+
             </div>
             <div className="input-group-room d-flex flex-column">
                 <label htmlFor="building">Location</label>

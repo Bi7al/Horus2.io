@@ -1,7 +1,9 @@
-import React, { useRef, useState } from 'react'
-import './Rooms.css'
+import React, { useRef, useState } from 'react';
+import './Rooms.css';
 import NewRoom from './NewRoom';
 import NewBuilding from './NewBuilding';
+import NewRoomGroup from './NewRoomGroup';
+
 function Rooms() {
     const modalCls = useRef();
     const [modal, setModal] = useState();
@@ -13,34 +15,50 @@ function Rooms() {
         rooms:[]
         }
         */
+    ]);
 
-    ])
-    //Changes Contetn of Modal Dynamically
+    const [roomGroups, setRoomGroups] = useState([
+        {
+            name: "Meeting Rooms",
+        },
+        {
+            name: "Open Spaces",
+        }
+    ]);
+
+    //Changes Content of Modal Dynamically
     function modalRender(event) {
         switch (event.target.name) {
             case "Room":
-                if (buildings.length === 0) {
-                    setModal("! No Buildings to Add Room to")
+                if (buildings.length == 0 || roomGroups.length == 0) {
+                    if (buildings.length == 0) {
+                        setModal("! No Buildings to Add Room to")
+                    }
+                    else {
+                        setModal("No Room Group Available ")
+                    }
                 } else {
-                    setModal(<NewRoom buildings={buildings} setBuildings={setBuildings} modalClose={modalClose} />);
+                    setModal(<NewRoom buildings={buildings} setBuildings={setBuildings} roomGroups={roomGroups} modalClose={modalClose} />);
                 }
                 break;
             case "Building":
                 setModal(<NewBuilding buildings={buildings} setBuildings={setBuildings} modalClose={modalClose} />);
+                break;
+            case "RoomGroup":
+                setModal(<NewRoomGroup roomGroups={roomGroups} setRoomGroups={setRoomGroups} modalClose={modalClose} />);
                 break;
             default:
                 console.log("Invalid modal type");
                 break;
         }
     }
+
     //Function Used to Close BootStrap Modal
     function modalClose() {
         if (modalCls.current) {
             modalCls.current.click();
         }
     }
-
-
 
     function removeBuilding(buildingName) {
         alert("Are you Sure And Want to Proceed Deleting " + buildingName)
@@ -56,18 +74,25 @@ function Rooms() {
         })
         setBuildings(result);
     }
+
+    function removeRoomGroup(groupName) {
+        alert("Are you Sure And Want to Proceed Deleting " + groupName)
+        setRoomGroups(roomGroups.filter(group => group.name !== groupName));
+    }
+
     return (
         <>
             <div className='room-wrapper' id='room-parent'>
                 <button data-bs-toggle="modal" name='Room' data-bs-target="#modal" onClick={modalRender} className='add-new-btn'>Add New Room</button>
                 <button data-bs-toggle="modal" name='Building' data-bs-target="#modal" onClick={modalRender} className='add-new-btn ms-2'>Add New Buidling</button>
+                <button data-bs-toggle="modal" name='RoomGroup' data-bs-target="#modal" onClick={modalRender} className='add-new-btn ms-2'>Add New Room Group</button>
                 <div className="buiding-group">
 
                     {
                         buildings.map((building, index) => {
                             return (
                                 <div key={index} className="building">
-                                    <div className="building__name"><button className='collapsed' data-bs-toggle="collapse" data-bs-target={`#building${index}`}><h5>{building.name}</h5>Adress {building.rooms.length} Rooms</button>
+                                    <div className="building__name"><button className='collapsed' data-bs-toggle="collapse" data-bs-target={`#building${index}`}><h5>{building.name}</h5>Adress {building.address}<br />Rooms: {building.rooms.length}</button>
                                     </div>
                                     <hr />
                                     <div className="building__rooms collapse" id={`building${index}`}>
@@ -94,8 +119,16 @@ function Rooms() {
                         <h5>Room Groups</h5>
                     </div>
                     <div className="types-group">
-                        <h6>Meeting Rooms</h6>
-                        <h6>Open Spaces</h6>
+                        {
+                            roomGroups.map((group, index) => {
+                                return (
+                                    <div key={index} className='room-group'>
+                                        <h6>{group.name}</h6>
+                                        <button className='remove-room-group-btn' onClick={() => removeRoomGroup(group.name)}>Remove</button>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div >
