@@ -121,7 +121,7 @@
     justify-content: space-between;
     gap: .5rem;
     align-items: center;
-    padding: 0 .25rem 0 .25rem !important;
+    padding: 0 1rem 0 .25rem !important;
 }
 .option-btn{
     background: none;
