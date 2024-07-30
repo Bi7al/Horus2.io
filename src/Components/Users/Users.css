@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 .table-container{
-    padding: .5rem;
+    padding: .0rem;
     height: 16rem;
     overflow: auto;
     width: 100%;
@@ -22,7 +22,7 @@
     border-spacing: 0 1rem ;
     margin-left: 5rem;
     height: 10rem;
-    width: 50rem ;
+    min-width: 50rem ;
     overflow: auto;
     
 }
@@ -30,17 +30,17 @@
 .table-container table th{
     color: rgb(218, 218, 218);
     text-align: start;
-    padding: .5rem 1rem 0.5rem 1rem;
+    padding: .5rem 1rem 0.5rem 0.25rem;
     font-weight: 500;
 
 }
 .table-container table tbody tr{
     background-color: aliceblue;
-    border: 1px solid black;
 }
 .table-container table td {
-    padding: .5rem 1rem 0.5rem 1rem;
+    padding: .5rem 1rem 0.5rem 0.25rem;
     margin-bottom: 1rem;
+    min-width: 5rem;
 } 
 /* .table-container table tbody img{
     height: 1.5rem;
@@ -49,7 +49,7 @@
     background-color: #3c1818;
 }*/
 .management-container{
-    button{
+    .add-btn{
         border: none;
         background:rgb(255, 153, 70);
         margin-bottom: 1rem;
@@ -60,7 +60,6 @@
 }
 .users-form{
     display: flex;
-    height: 10rem;
     justify-content: space-around;
     padding: 2rem;
     gap: 2rem;
@@ -92,13 +91,49 @@
     border: 1px solid rgb(254, 255, 208);
     margin-bottom: 1rem;
 }
+.no-entries{
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-top: 5rem;
+}
 .form-submit:hover{
     border: 1px solid rgb(255, 169, 126);
     box-sizing: border-box;
     scale: 1.1;
 }
-
-
+/* CSS FOR Group Input */
+.auth{
+    display: flex;
+    width: 50rem;
+    gap:.5rem
+}
+.auth-option{
+    height: 1.5rem;
+    gap: .25rem;
+    display: flex;
+    align-items: center;
+}
+.options{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    gap: .5rem;
+    align-items: center;
+    padding: 0 .25rem 0 .25rem !important;
+}
+.option-btn{
+    background: none;
+    text-decoration: underline;
+    font-size: 14px;
+    border: none;
+}
+.option-btn:hover{
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgb(152, 149, 149);
+    transition: 200ms;
+}
 
 
 

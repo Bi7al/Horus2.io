@@ -1,110 +1,106 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "./Users.css"
-function UserRow(props) {
-  return (
-    <>
-      <tr key={props.user.id} >
-        <td>{props.user.name}</td>
-        <td>{props.user.email}</td>
-        <td>{props.user.rooms}</td>
-        <td>{props.user.role}</td>
-        <td>{props.user.lastLogin}</td>
-        <td>{props.user.id}</td>
-      </tr></>
+import NewGroup from './NewGroup';
+import NewUser from './NewUser';
 
-  );
-}
+function UserRow({ user, handleDeleteUser, handleManageUser, handleSendLoginId }) {
+  //const [showOptions, setShowOptions] = useState(false);
 
-function GroupRow(props) {
+
+
   return (
-    <tr key={props.group.id}>
-      <td>{props.group.name}</td>
-      <td>{props.group.members}</td>
-      <td>{props.group.id}</td>
+    <tr key={user.id}>
+      <td>{user.name}</td>
+      <td>{user.email}</td>
+      <td>{user.rooms}</td>
+      <td>{user.role}</td>
+      <td>{user.lastLogin}</td>
+      <td>{user.id}</td>
+      <td className='options'>
+
+        <button className='option-btn' onClick={() => handleDeleteUser(user.id)}>Delete User</button>
+        <button className='option-btn' onClick={() => handleManageUser(user.id)}>Manage User</button>
+        <button className='option-btn' onClick={() => handleSendLoginId(user.id)}>Send Login ID to User</button>
+
+      </td>
     </tr>
   );
 }
 
+function GroupRow({ group, handleDeleteGroup, handleManageGroup }) {
+  return (
+    <tr key={group.id}>
+      <td>{group.name}</td>
+      <td>{group.members}</td>
+      <td>{group.id}</td>
+      <td className='options'>
+
+        <button className='option-btn' onClick={() => handleDeleteGroup(group.id)}>Delete User</button>
+        <button className='option-btn' onClick={() => handleManageGroup(group.id)}>Manage User</button>
+
+      </td>
+    </tr>
+  );
+}
+
+
 function Users() {
-  const modal1 = useRef(); //Stores Refrence to modal close btns and is auto clicked to close modal in form submit functions
-  const modal2 = useRef();
+  const modalRef = useRef();
+  const [modal, setModal] = useState(null)
   const [users, setUsers] = useState([
-    {
-      name: 'Name',
-      email: 'nom-prenom@google.com',
-      rooms: 1,
-      role: 'User',
-      lastLogin: '24/04/2024',
-      id: '636f629'
-    },
-    {
-      name: 'Name',
-      email: 'nom-prenom@google.com',
-      rooms: 1,
-      role: 'Editor',
-      lastLogin: 'Today',
-      id: '636f630'
-    }
+
   ]);
 
   const [groups, setGroups] = useState([
-    {
-      name: 'Room Manager',
-      members: 1,
-      id: '636f628'
-    },
-    {
-      name: 'Editor',
-      members: 1,
-      id: '636f629'
-    }
+
   ]);
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: '',
-    role: '',
-    rooms: "",
-    lastLogin: '',
-    id: '',
-  })
 
 
-  const [newGroup, setNewGroup] = useState({
-    name: '',
-    members: '',
-    id: '',
-  })
-  function handleInput(event) {
-    setNewUser({ ...newUser, [event.target.name]: event.target.value });
-  }
-  function handleNewUser(e) {
-    e.preventDefault();
-    setUsers([...users, newUser]);
-    setNewUser({
-      name: '',
-      email: '',
-      role: '',
-      rooms: "",
-      lastLogin: '',
-      id: '',
-    });
-    modal1.current.click();
-
-  }
-  function handleInputGroup(event) {
-    setNewGroup({ ...newGroup, [event.target.name]: event.target.value });
-  }
-  function handleNewGroup(e) {
-    e.preventDefault();
-    setGroups([...groups, newGroup]);
-    setNewGroup({
-      name: '',
-      members: '',
-      id: '',
-    });
-    modal2.current.click();
+  function closeModal() {
+    modalRef.current.click();
   }
 
+  function modalRenderer(name, obj) { //obj= userObj | groupObj
+    switch (name) {
+      case "user":
+        setModal(<NewUser users={users} setUsers={setUsers} closeModal={closeModal} />)
+        break;
+      case "group":
+        setModal(< NewGroup groups={groups} setGroups={setGroups} closeModal={closeModal} />)
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
+
+
+  function handleDeleteUser(id) {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+
+      setUsers(users.filter((user) => user.id !== id));
+    }
+  };
+
+  function handleManageUser() {
+    //Logic to Manage user
+  };
+
+  function handleSendLoginId() {
+    // Call API to send login ID to user
+    console.log("Send login ID to user");
+  };
+  function handleDeleteGroup(id) {
+    if (window.confirm("Are you sure you want to delete this Group?")) {
+      setGroups(groups.filter((group) => group.id !== id))
+    }
+
+  }
+  function handleManageGroup() {
+    //Logic to Manage group
+  };
 
   return (
     <>
@@ -112,120 +108,68 @@ function Users() {
         <div className='d-flex justify-content-between'>
           <h1>Users</h1>
           <div className='mt-1'>
-            <button data-bs-toggle="modal" data-bs-target="#NewUser">Add User</button>
-            <button data-bs-toggle="modal" data-bs-target="#NewGroup">Add Group</button></div>
+            <button className='add-btn' onClick={() => modalRenderer("user")} data-bs-toggle="modal" data-bs-target="#modal">Add User</button>
+            <button className='add-btn' onClick={() => modalRenderer("group")} data-bs-toggle="modal" data-bs-target="#modal">Add Group</button></div>
         </div >
         <div className="table-container">
 
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>No. of Rooms</th>
-                <th>Role</th>
-                <th>Last Login</th>
-                <th>ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map(function (user) {
-                return <UserRow key={user.id} user={user} />;
-              })}
-            </tbody>
-          </table>
+          {
+            users.length > 0 ? (<table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>No. of Rooms</th>
+                  <th>Role</th>
+                  <th>Last Login</th>
+                  <th>ID</th>
+                  <th>Additional</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map(function (user) {
+                  return <UserRow key={user.id} user={user} handleDeleteUser={handleDeleteUser} handleManageUser={handleManageUser} handleSendLoginId={handleSendLoginId} />;
+                })}
+              </tbody>
+            </table>) : <p className='no-entries'>Add New Users to view</p>
+          }
         </div>
         <h1>Groups</h1>
         <div className="table-container">
 
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Members</th>
-                <th>ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {groups.map(function (group) {
-                return <GroupRow key={group.id} group={group} />;
-              })}
-            </tbody>
-          </table>
+          {
+            groups.length > 0 ? (<table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Members</th>
+                  <th>ID</th>
+                  <th>Additional</th>
+                </tr>
+              </thead>
+              <tbody>
+                {groups.map(function (group) {
+                  return <GroupRow key={group.id} group={group} handleDeleteGroup={handleDeleteGroup} handleManageGroup={handleManageGroup} />;
+                })}
+              </tbody>
+            </table>) : <p className='no-entries'>Add New Groups to view</p>
+          }
         </div>
       </div>
 
 
 
       {/* Modal */}
-      <div className="modal fade" id="NewUser" tabIndex="-1" role="dialog" aria-labelledby="New Automation Dialog" aria-hidden="true">
+      <div className="modal fade" id="modal" tabIndex="-1" role="dialog" aria-labelledby="Modal for new group or User" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
-          <div className="modal-content ">
-            <form onSubmit={handleNewUser} className='d-flex flex-column  align-items-center '>
-              <div className="users-form">
-                <div className="column">
-                  <div className='users-form__input'>
-                    <label htmlFor="">Enter User Name:</label>
-                    <input type="text" name='name' value={newUser.name} onChange={handleInput} placeholder='Enter User Name' required />
-                  </div>
-                  <div className='users-form__input'>
-                    <label htmlFor="">Enter User Email:</label>
-                    <input type="email" name='email' value={newUser.email} onChange={handleInput} placeholder='Enter User Email' required />
-                  </div>
-                  <div className='users-form__input'>
-                    <label htmlFor="">Number of Rooms:</label>
-                    <input type="number" name='rooms' value={newUser.rooms} onChange={handleInput} placeholder='Enter Number of Rooms' required />
-                  </div>
-                </div>
-                <div className="column">
-                  <div className='users-form__input'>
-                    <label htmlFor="">Enter Role of the User:</label>
-                    <input type="text" name='role' value={newUser.role} onChange={handleInput} placeholder='Enter User Role' required />
-                  </div>
-                  <div className='users-form__input'>
-                    <label htmlFor="">Enter User ID:</label>
-                    <input type="number" name='id' value={newUser.id} onChange={handleInput} placeholder='Enter User ID' required />
-                  </div>
-                  {/* <div className='users-form__input'>
-                      <label htmlFor="">Last Login</label>
-                      <input type="" name='lastLogin' value={newUser.lastLogin} onChange={handleInput} placeholder='Enter User Name' required />
-                    </div> */}
-
-                </div>
-              </div>
-              <button className="form-submit" >Submit</button>
-            </form>
+          <div className="modal-content p-1">
+            {modal}
           </div>
           {/* Modal Close Button */}
-          <button data-bs-dismiss="modal" ref={modal1} hidden></button>
+          <button data-bs-dismiss="modal" ref={modalRef} hidden></button>
         </div>
       </div>
-      {/* MOdal For New Group */}
-      <div className="modal fade" id="NewGroup" tabIndex="-1" role="dialog" aria-labelledby="New Automation Dialog" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
-          <div className="modal-content ">
-            <form onSubmit={handleNewGroup} className='d-flex flex-column  align-items-center '>
-              <div className="users-form">
-                <div className="column">
-                  <div className='users-form__input'>
-                    <label htmlFor="">Enter Group Name:</label>
-                    <input type="text" name='name' value={newGroup.name} onChange={handleInputGroup} placeholder='Enter group Name' required />
-                  </div>
-                </div>
-                <div className="column">
-                  <div className='users-form__input'>
-                    <label htmlFor="">Enter Group ID:</label>
-                    <input type="number" name='id' value={newGroup.id} onChange={handleInputGroup} placeholder='Enter Group ID' required />
-                  </div>
-                </div>
-              </div>
-              <button className="form-submit" >Submit</button>
-            </form>
-          </div>
-        </div>
-        {/* Modal Close Button */}
-        <button data-bs-dismiss="modal" ref={modal2} hidden></button>
-      </div>
+
 
     </>
   );

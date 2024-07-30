@@ -4,7 +4,10 @@ function NewBuilding({ buildings, setBuildings, modalClose }) {
   const [newBuilding, setNewBuilding] = useState({
     name: '',
     address: '',
-    rooms: [],
+    floorCount: 1,
+    floors: {
+      floor0: []
+    },
   }
   )
   function handleSubmit(e) {
@@ -13,7 +16,10 @@ function NewBuilding({ buildings, setBuildings, modalClose }) {
     setNewBuilding({
       name: '',
       address: '',
-      rooms: [],
+      floorCount: 0,
+      floors: {
+        floor0: []
+      },
     });
     modalClose();
   }

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { v4 } from 'uuid';
 
 function NewRoom({ buildings, setBuildings, modalClose, roomGroups }) {
     const [room, setRoom] = useState({
-        roomId: null,
+        roomId: '',
         roomName: "",
-        location: "",
+        location: "", // This will store the floor number
         roomType: "",
-        building: ""
+        building: "", // This will store the building name
     });
 
     function handleChange(e) {
@@ -20,23 +19,29 @@ function NewRoom({ buildings, setBuildings, modalClose, roomGroups }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const newRoom = { ...room, roomId: v4() };
+        const newRoomId = crypto.randomUUID();
 
+        // Use the newRoomId variable instead of room.roomId
+        const updatedRoom = { ...room, roomId: newRoomId };
+        //Find the building and floor to add the new room to
         const updatedBuildings = buildings.map(building => {
-            if (building.name === newRoom.building) {
-                return { ...building, rooms: [...building.rooms, newRoom] };
+            if (building.name === room.building) {
+                const updatedFloors = { ...building.floors };
+
+                updatedFloors[room.location].push(updatedRoom);
+                return { ...building, floors: updatedFloors };
             }
             return building;
         });
-
+        console.log(updatedRoom)
         setBuildings(updatedBuildings);
 
         setRoom({
-            roomId: null,
+            roomId: '',
             roomName: '',
             location: '',
             roomType: '',
-            building: ''
+            building: '',
         });
 
         modalClose();
@@ -53,18 +58,16 @@ function NewRoom({ buildings, setBuildings, modalClose, roomGroups }) {
                 {
                     roomGroups.map((roomType, index) => {
                         return (
-                            <>
-                                <label htmlFor="room-type " className='ms-4'>{roomType.name}</label>
-                                <input type="radio" name='roomType' value={roomType.name} onChange={handleChange} className='ms-1' required={true} />
-                            </>
 
+                            <label key={index} htmlFor="room-type " className='ms-4 d-flex align-items-center'>{roomType.name}
+                                <input type="radio" name='roomType' value={roomType.name} onChange={handleChange} className='ms-1' required={true} />
+                            </label>
                         )
                     })
                 }
-
             </div>
             <div className="input-group-room d-flex flex-column">
-                <label htmlFor="building">Location</label>
+                <label htmlFor="building">Building</label>
                 <select name="building" id="building" onChange={handleChange} required={true} value={room.building}>
                     <option >Select Building</option>
                     {
@@ -74,16 +77,20 @@ function NewRoom({ buildings, setBuildings, modalClose, roomGroups }) {
                     }
                 </select>
             </div>
-
             <div className="input-group-room d-flex flex-column">
-                <label htmlFor="room ">Floor</label>
-                <select name="location" id="building" onChange={handleChange} value={room.location} required={true}>
+                <label htmlFor="floor">Floor</label>
+                <select name="location" id="floor" onChange={handleChange} value={room.location} required={true}>
                     <option >Select Floor</option>
-                    <option value="Floor 1">Floor 1</option>
-                    <option value="Floor 2">Floor 2</option>
-                    <option value="Floor 3">Floor 3</option>
+                    {
+                        // Get the floors for the selected building
+                        buildings.find(building => building.name === room.building)?.floors &&
+                        Object.keys(buildings.find(building => building.name === room.building).floors).map((floor, index) => {
+                            return <option key={index} value={floor}>Floor {index}</option>
+                        })
+                    }
                 </select>
             </div>
+
             <button type='submit' >Create Room</button>
         </form>
     )

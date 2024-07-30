@@ -20,7 +20,7 @@ overflow: auto;
     border-radius: 1rem;
     color: rgb(182, 182, 182);
 }
-.building__name button{
+.building__name .accordian-button{
     background: none;
     border: none;
     width: 100%;
@@ -29,7 +29,17 @@ overflow: auto;
         color: rgb(41, 41, 41);
     }
 }
-.building__rooms{
+.add-floor{
+    color: white;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+.add-floor:hover{
+    text-decoration: underline;
+}
+.floor__rooms{
     display: flex;
     gap: 1rem;
     justify-content: flex-start;
@@ -122,17 +132,20 @@ color: rgb(203, 209, 214);
 text-decoration: underline;
 text-decoration-color: grey;
 }
-.building-remove-btn{
-    color: rgb(146, 146, 146);  
+.remove-btn{
+    color: rgb(255, 255, 255);  
     padding: none;  
+    text-decoration: underline;
     background:transparent;
     border: none;
 
 }
-.building-remove-btn:hover{
+.remove-btn:hover{
+    transition: 200ms;
     color: rgb(183, 183, 183);  
     text-decoration: underline;
     text-decoration-color: white;
+    text-decoration-thickness: 1.5px
 
 }
 /* For New Building */
