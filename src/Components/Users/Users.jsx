@@ -35,8 +35,8 @@ function GroupRow({ group, handleDeleteGroup, handleManageGroup }) {
       <td>{group.id}</td>
       <td className='options'>
 
-        <button className='option-btn' onClick={() => handleDeleteGroup(group.id)}>Delete User</button>
-        <button className='option-btn' onClick={() => handleManageGroup(group.id)}>Manage User</button>
+        <button className='option-btn' onClick={() => handleDeleteGroup(group.id)}>Delete Group</button>
+        <button className='option-btn' onClick={() => handleManageGroup(group.id)}>Manage Group</button>
 
       </td>
     </tr>
