@@ -1,60 +1,64 @@
 import React, { useState, useEffect } from 'react';
-//import axios from 'axios';
-import "./LogComponent.css";
-function Log() {
+import './LogComponent.css';
+
+function LogComponent() {
+    // State to hold event logs
     const [eventLogs, setEventLogs] = useState([
         {
             id: 1,
             timestamp: '2022-01-01 12:00:00',
             eventType: 'INFO',
             deviceName: 'Device 1',
-            message: 'This is a sample log message'
+            message: 'This is a sample log message',
         },
         {
             id: 2,
             timestamp: '2022-01-01 12:00:00',
             eventType: 'INFO',
             deviceName: 'Device 1',
-            message: 'This is a sample log message'
+            message: 'This is a sample log message',
         },
         {
             id: 3,
             timestamp: '2022-01-01 12:00:00',
             eventType: 'INFO',
             deviceName: 'Device 1',
-            message: 'This is a sample log message'
+            message: 'This is a sample log message',
         },
         {
             id: 4,
             timestamp: '2022-01-01 12:00:00',
             eventType: 'INFO',
             deviceName: 'Device 1',
-            message: 'This is a sample log message'
+            message: 'This is a sample log message',
         },
     ]);
+
+    // State to hold any potential errors
     const [error, setError] = useState(null);
 
-    // function fetchEventLogs() {
+    // Uncomment this code block to fetch event logs from an API
+    // useEffect(() => {
+    //   const fetchEventLogs = async () => {
     //     try {
-    //         axios.get('/api/event-logs').then(response => {
-    //             setEventLogs(response.data);
-    //         }).catch(error => {
-    //             setError(error.message);
-    //         });
+    //       const response = await axios.get('/api/event-logs');
+    //       setEventLogs(response.data);
+    //     } catch (error) {
+    //       setError(error.message);
     //     }
-    // }
+    //   };
 
-    // useEffect(function () {
-    //     fetchEventLogs();
+    //   fetchEventLogs();
     // }, []);
 
-    // if (error) {
-    //     return (
-    //         <div className="error-message">
-    //             Error: {error}
-    //         </div>
-    //     );
-    // }
+    // Render error message if there's an error
+    if (error) {
+        return (
+            <div className="error-message">
+                Error: {error}
+            </div>
+        );
+    }
 
     return (
         <div className="wrapper">
@@ -69,16 +73,14 @@ function Log() {
                         </tr>
                     </thead>
                     <tbody>
-                        {eventLogs.map(function (log) {
-                            return (
-                                <tr key={log.id}>
-                                    <td>{log.timestamp}</td>
-                                    <td>{log.eventType}</td>
-                                    <td>{log.deviceName}</td>
-                                    <td>{log.message}</td>
-                                </tr>
-                            );
-                        })}
+                        {eventLogs.map((log) => (
+                            <tr key={log.id}>
+                                <td>{log.timestamp}</td>
+                                <td>{log.eventType}</td>
+                                <td>{log.deviceName}</td>
+                                <td>{log.message}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
@@ -86,4 +88,4 @@ function Log() {
     );
 }
 
-export default Log;
+export default LogComponent;

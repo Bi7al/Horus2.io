@@ -109,7 +109,7 @@ function Devices() {
                                                         <option value="Kitchen">Kitchen</option>
                                                         <option value="Bedroom">Bedroom</option>
                                                     </select>
-                                                    <button className='ms-1 ps-1 border-0 opt-btn' onClick={(e) => console.log(e.target)}>Do Something</button>
+                                                    <button className='ms-1 ps-1 border-0 opt-btn' onClick={(e) => console.log()}>Do Something</button>
                                                 </li>
                                             ))}
                                         </ul>

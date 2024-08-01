@@ -1,125 +1,112 @@
 import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import "../../Components/Automations/Automations.css";
+import './Automations.css';
 
-function AutomationItem({ automation, onChange, removeAutomation }) {
-
+// Component responsible for rendering a single automation item
+function AutomationItem({ automation, onToggle, onRemove }) {
     return (
         <div className="automation-item">
             <h2>{automation.name}</h2>
             <label className="form-switch">
-                <input type="checkbox" onChange={(e) => { }} />
+                <input
+                    type="checkbox"
+                    checked={automation.checked}
+                    onChange={() => onToggle(automation.id)}
+                />
                 <i></i>
-                <button className='remove-automation' onClick={() => { removeAutomation(automation.id) }}>Remove</button>
+                <button className="remove-automation" onClick={() => onRemove(automation.id)}>
+                    Remove
+                </button>
             </label>
         </div>
     );
 }
 
+// Main component for managing automations
 function Automations() {
     const [automations, setAutomations] = useState([
-        {
-            id: 1,
-            name: "Automation 1",
-            checked: true,
-        },
-        {
-            id: 2,
-            name: "Automation 2",
-            checked: false,
-
-        }, {
-            id: 3,
-            name: "Automation 3",
-            checked: true,
-
-        }
-
+        { id: 1, name: 'Automation 1', checked: true },
+        { id: 2, name: 'Automation 2', checked: false },
+        { id: 3, name: 'Automation 3', checked: true },
     ]);
 
-    const [newAutomation, setAutomation] = useState({
-        name: "",
+    const [newAutomation, setNewAutomation] = useState({
+        name: '',
         checked: false,
-        triggerEvent: "",
-        triggerDate: "",
-        triggerTime: "",
-        triggerDevice: "",
-        action: "",
-
+        triggerEvent: '',
+        triggerDate: '',
+        triggerTime: '',
+        triggerDevice: '',
+        action: '',
     });
-    const ClseBtn = useRef();
 
-    const handleCheck = (id) => {
-        setAutomations(automations.map(automation => {
-            if (automation.id === id) {
-                return { ...automation, checked: !automation.checked }
-            }
-            return automation;
+    const closeButtonRef = useRef(null);
+
+    // Function to handle toggling the automation's checked state
+    const handleToggle = (id) => {
+        setAutomations((prevAutomations) =>
+            prevAutomations.map((automation) =>
+                automation.id === id ? { ...automation, checked: !automation.checked } : automation
+            )
+        );
+    };
+
+    // Function to handle changes in the new automation form fields
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewAutomation((prevAutomation) => ({
+            ...prevAutomation,
+            [name]: value,
+            id: uuidv4(),
         }));
-    }
+    };
 
-
-
-
-    function handleChange(e) {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
-        setAutomation({
-            ...newAutomation,
-            [fieldName]: fieldValue, id: uuidv4()
-        });
-
-
-    }
+    // Function to handle the submission of the new automation form
     const handleSubmit = (e) => {
         e.preventDefault();
-        ClseBtn.current.click();
-        setAutomations([...automations, newAutomation]);
-        console.log(newAutomation)
-        setAutomation((prev) => {
-            return {
-                name: "",
-                checked: false,
-                triggerEvent: "",
-                triggerDevice: "",
-                triggerDate: "",
-                triggerTime: "",
-                action: "",
-            }
+        closeButtonRef.current.click();
+        setAutomations((prevAutomations) => [...prevAutomations, newAutomation]);
+        setNewAutomation({
+            name: '',
+            checked: false,
+            triggerEvent: '',
+            triggerDevice: '',
+            triggerDate: '',
+            triggerTime: '',
+            action: '',
         });
+    };
 
-    }
-    function removeAutomation(id) {
-        setAutomations(automations.filter(automation => automation.id !== id));
+    // Function to handle the removal of an automation
+    const handleRemove = (id) => {
+        setAutomations((prevAutomations) => prevAutomations.filter((automation) => automation.id !== id));
+    };
 
-    }
     return (
         <>
             <div className="automations-wrapper">
-                <button className='add-automation-button' type='button' data-bs-toggle="modal" data-bs-target="#AutoInput">+ Create an Automation</button>
+                <button className="add-automation-button" type="button" data-bs-toggle="modal" data-bs-target="#AutoInput">
+                    + Create an Automation
+                </button>
                 <div className="automations-container">
                     <h1>Automations</h1>
                     <div className="automations-list">
-                        {automations.map((autoName) => {
-                            return (
-                                <AutomationItem
-                                    key={autoName.id}
-                                    automation={autoName}
-                                    onChange={handleCheck}
-                                    removeAutomation={removeAutomation}
-
-                                />
-                            )
-                        })}
+                        {automations.map((automation) => (
+                            <AutomationItem
+                                key={automation.id}
+                                automation={automation}
+                                onToggle={handleToggle}
+                                onRemove={handleRemove}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
 
-
             <div className="modal fade" id="AutoInput" tabIndex="-1" role="dialog" aria-labelledby="New Automation Dialog" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div className="modal-content" id='#modal-content'>
-                        <form onSubmit={handleSubmit} className='automation-form'>
+                    <div className="modal-content" id="#modal-content">
+                        <form onSubmit={handleSubmit} className="automation-form">
                             <div className="input-row">
                                 <div className="input-group">
                                     <label htmlFor="automation-name">Automation Name:</label>
@@ -208,7 +195,7 @@ function Automations() {
                             }
                             <div className="buttons">
                                 <button type="submit" id='submit-button'>Save Automation</button>
-                                <button data-bs-dismiss="modal" ref={ClseBtn} type="button" id='submit-button'>Close</button>
+                                <button data-bs-dismiss="modal" ref={closeButtonRef} type="button" id='submit-button'>Close</button>
                             </div>
                         </form>
                     </div>
