@@ -7,6 +7,7 @@ import Floor from './Floor';
 
 function Rooms() {
     const modalCls = useRef();
+    const modalOpn = useRef()
     const [modal, setModal] = useState();
     const [buildings, setBuildings] = useState([
 
@@ -22,35 +23,54 @@ function Rooms() {
     ]);
 
     //Changes Content of Modal Dynamically
-    const modalRender = (event) => {
+    function modalRender(event) {
+        setModal((prev) => {
+            return null;
+        })
         switch (event.target.name) {
+
             case "Room":
                 if (buildings.length === 0 || roomGroups.length === 0) {
                     if (buildings.length === 0) {
+
                         setModal("! No Buildings to Add Room to")
+
                     } else {
+
                         setModal("No Room Group Available ")
+
+
                     }
                 } else {
                     const hasFloors = buildings.some((building) => Object.keys(building.floors).length > 0);
                     if (!hasFloors) {
+
                         setModal("No Floors available to add a room");
+
+
                     } else {
+
                         setModal(<NewRoom buildings={buildings} setBuildings={setBuildings} roomGroups={roomGroups} modalClose={modalClose} />);
+
                     }
                 }
                 break;
 
             case "Building":
+
                 setModal(<NewBuilding buildings={buildings} setBuildings={setBuildings} modalClose={modalClose} />);
+
                 break;
             case "RoomGroup":
+
                 setModal(<NewRoomGroup roomGroups={roomGroups} setRoomGroups={setRoomGroups} modalClose={modalClose} />);
+
                 break;
             default:
                 console.log("Invalid modal type");
                 break;
         }
+        modalOpn.current.click();
     }
     //Function TO add A Floor To Building
     function addFloor(buildingName) {
@@ -118,9 +138,10 @@ function Rooms() {
     return (
         <>
             <div className='room-wrapper' id='room-parent'>
-                <button data-bs-toggle="modal" name='Room' data-bs-target="#modal" onClick={modalRender} className='add-new-btn'>Add New Room</button>
-                <button data-bs-toggle="modal" name='Building' data-bs-target="#modal" onClick={modalRender} className='add-new-btn ms-2'>Add New Buidling</button>
-                <button data-bs-toggle="modal" name='RoomGroup' data-bs-target="#modal" onClick={modalRender} className='add-new-btn ms-2'>Add New Room Group</button>
+                <button name='Room' onClick={modalRender} className='add-new-btn'>Add New Room</button>
+                <button name='Building' onClick={modalRender} className='add-new-btn ms-2'>Add New Buidling</button>
+                <button name='RoomGroup' onClick={modalRender} className='add-new-btn ms-2'>Add New Room Group</button>
+                <button ref={modalOpn} data-bs-toggle="modal" data-bs-target="#modal" hidden>modal toggle</button>
                 <div className="buiding-group">
 
                     {
