@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 function NewGroup({ groups, setGroups, closeModal }) {
     const [newGroup, setNewGroup] = useState({
         name: '',
-        members: '',
+        members: [],
         id: '',
         newsAuth: {
             publishMessage: false,
@@ -41,7 +41,7 @@ function NewGroup({ groups, setGroups, closeModal }) {
         setGroups([...groups, newGroup]);
         setNewGroup({
             name: '',
-            members: '',
+            members: [],
             id: '',
             newsAuth: {
                 publishMessage: false,

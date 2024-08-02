@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import "./Users.css"
 import NewGroup from './NewGroup';
 import NewUser from './NewUser';
+import AddToGroup from './AddToGroup';
 
 function UserRow({ user, handleDeleteUser, handleManageUser, handleSendLoginId }) {
   //const [showOptions, setShowOptions] = useState(false);
@@ -27,15 +28,16 @@ function UserRow({ user, handleDeleteUser, handleManageUser, handleSendLoginId }
   );
 }
 
-function GroupRow({ group, handleDeleteGroup, handleManageGroup }) {
+function GroupRow({ group, handleDeleteGroup, handleManageGroup, modalRenderer }) {
   return (
     <tr key={group.id}>
       <td>{group.name}</td>
-      <td>{group.members}</td>
+      <td>{group.members?.length}</td>
       <td>{group.id}</td>
       <td className='options'>
 
         <button className='option-btn' onClick={() => handleDeleteGroup(group.id)}>Delete Group</button>
+        <button className='option-btn' data-bs-toggle="modal" data-bs-target="#modal" onClick={() => modalRenderer("AddToGroup", group.id)}>Add Member</button>
         <button className='option-btn' onClick={() => handleManageGroup(group.id)}>Manage Group</button>
 
       </td>
@@ -60,7 +62,7 @@ function Users() {
     modalRef.current.click();
   }
 
-  function modalRenderer(name, obj) { //obj= userObj | groupObj
+  function modalRenderer(name, Id) { //obj= userObj | groupObj
     switch (name) {
       case "user":
         setModal(<NewUser users={users} setUsers={setUsers} closeModal={closeModal} />)
@@ -68,7 +70,9 @@ function Users() {
       case "group":
         setModal(< NewGroup groups={groups} setGroups={setGroups} closeModal={closeModal} />)
         break;
-
+      case "AddToGroup":
+        setModal(<AddToGroup users={users} groups={groups} setGroups={setGroups} closeModal={closeModal} groupId={Id} />)
+        break;
       default:
         break;
     }
@@ -149,7 +153,7 @@ function Users() {
               </thead>
               <tbody>
                 {groups.map(function (group) {
-                  return <GroupRow key={group.id} group={group} handleDeleteGroup={handleDeleteGroup} handleManageGroup={handleManageGroup} />;
+                  return <GroupRow key={group.id} group={group} handleDeleteGroup={handleDeleteGroup} handleManageGroup={handleManageGroup} modalRenderer={modalRenderer} />;
                 })}
               </tbody>
             </table>) : <p className='no-entries'>Add New Groups to view</p>
