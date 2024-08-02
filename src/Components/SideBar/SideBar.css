@@ -70,4 +70,13 @@
 .Sidebar-body  li a:focus,.Sidebar-body  li a:hover{
     color: rgb(255, 255, 255);
 }
-
+.sidebar-container{
+    position: relative;
+    height: 90vh;
+    box-sizing: border-box;
+}
+.sidebar-footer{
+    margin-left: 2rem;
+    position: absolute;
+    bottom: 0;
+}

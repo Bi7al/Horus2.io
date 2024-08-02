@@ -8,6 +8,7 @@ function App() {
       <div className="Custom-Grid">
         <div className='Side-Bar'>
           <SideBar />
+
         </div>
         <div className="Outlet">
           <Outlet />

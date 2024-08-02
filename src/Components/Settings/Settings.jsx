@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Settings.css';
+
 function Settings() {
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [backupOptions, setBackupOptions] = useState({
